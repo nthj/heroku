@@ -109,6 +109,7 @@ module Heroku::Command
     end
 
     def parse_log(log)
+      log.gsub!(/\[worker\.([\d]{1})\]/, '[worker.0\1]')
       return unless parsed = log.match(/^(.*\[(\w+)([\d\.]+)?\]:)(.*)?$/)
       [1, 2, 4].map { |i| parsed[i] }
     end
